@@ -1,10 +1,8 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import {
-  BookmarkIcon,
   HomeIcon,
   SearchIcon,
-  UserIcon,
 } from "lucide-react-native";
 import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -59,7 +57,7 @@ const _Layout = () => {
             ),
           }}
         />{" "}
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="saved"
           options={{
             headerShown: false,
@@ -76,8 +74,8 @@ const _Layout = () => {
               </>
             ),
           }}
-        />{" "}
-        <Tabs.Screen
+        />{" "} */}
+        {/* <Tabs.Screen
           name="profile"
           options={{
             headerShown: false,
@@ -94,7 +92,7 @@ const _Layout = () => {
               </>
             ),
           }}
-        />
+        /> */}
       </Tabs>
     </SafeAreaProvider>
   );

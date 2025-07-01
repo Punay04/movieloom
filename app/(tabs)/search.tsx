@@ -5,15 +5,15 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
 import MovieCard from "@/components/movieCard";
 import SearchBar from "@/components/searchBar";
-import { Activity } from "lucide-react-native";
+import { updateSearchCount } from "@/services/appwrite";
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
     data: movies,
@@ -39,6 +39,12 @@ const Search = () => {
     }, 1000);
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
+
+  useEffect(() => {
+    if (movies?.[0] && movies?.length > 0) {
+      updateSearchCount(searchQuery, movies[0]);
+    }
+  }, [movies]);
 
   return (
     <View className="bg-gray-900 flex-1">

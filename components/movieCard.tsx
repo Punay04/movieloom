@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "expo-router";
 import { StarIcon } from "lucide-react-native";
 
-interface Movie {
+export interface Movie {
   id: number;
   title: string;
   adult: boolean;

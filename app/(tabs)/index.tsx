@@ -1,6 +1,8 @@
 import MovieCard from "@/components/movieCard";
 import SearchBar from "@/components/searchBar";
+import TrendingCard from "@/components/trendingCard";
 import { fetchMovies } from "@/services/api";
+import { getTrendingMovies } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { Link, router } from "expo-router";
 import {
@@ -13,6 +15,12 @@ import {
 } from "react-native";
 
 export default function Index() {
+  const {
+    data: trendingMovies,
+    loading: trendingMoviesLoading,
+    error: trendingMoviesError,
+  } = useFetch(getTrendingMovies);
+
   const {
     data: movies,
     loading: moviesLoading,
@@ -34,20 +42,39 @@ export default function Index() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
         >
-          {moviesLoading ? (
+          {moviesLoading || trendingMoviesLoading ? (
             <ActivityIndicator
               size={"large"}
               color={"#22c55e"}
               className="mt-10 self-center"
             />
-          ) : moviesError ? (
+          ) : moviesError || trendingMoviesError ? (
             <Text className="text-lg text-white font-bold mt-5 mb-3">
-              Error : {moviesError}
+              Error : {moviesError || trendingMoviesError}
             </Text>
           ) : (
             <View className="flex-1 mt-5">
               <SearchBar onPress={() => router.push("/search")} />
               <>
+                {trendingMovies && trendingMovies && (
+                  <View className="mt-10">
+                    <Text className="ext-lg text-white font-bold mb-3">
+                      Trending Movies
+                    </Text>
+                    <FlatList
+                      showsHorizontalScrollIndicator={false}
+                      ItemSeparatorComponent={() => <View className="w-3" />}
+                      horizontal
+                      data={trendingMovies}
+                      renderItem={({ item, index }) => (
+                        <>
+                          <TrendingCard movie={item} index={index} />
+                        </>
+                      )}
+                    />
+                  </View>
+                )}
+
                 <Text className="text-lg text-white font-bold mt-5 mb-3">
                   Latest Movies
                 </Text>
