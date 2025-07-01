@@ -42,6 +42,9 @@ export default function Index() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}
         >
+          <Text className="text-3xl italic text-white font-bold mt-10">
+            MovieLoom
+          </Text>
           {moviesLoading || trendingMoviesLoading ? (
             <ActivityIndicator
               size={"large"}
@@ -53,7 +56,7 @@ export default function Index() {
               Error : {moviesError || trendingMoviesError}
             </Text>
           ) : (
-            <View className="flex-1 mt-5">
+            <View className="flex-1">
               <SearchBar onPress={() => router.push("/search")} />
               <>
                 {trendingMovies && trendingMovies && (

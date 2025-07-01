@@ -1,9 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import {
-  HomeIcon,
-  SearchIcon,
-} from "lucide-react-native";
+import { HomeIcon, SearchIcon } from "lucide-react-native";
 import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
